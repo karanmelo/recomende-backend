@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
+import '../database';
 import { routes } from './routes';
 
 const PORT = process.env.PORT || 3333;
