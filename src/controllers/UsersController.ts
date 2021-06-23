@@ -8,20 +8,12 @@ class UsersController {
     const { name, email, password, admin } = request.body as IUser;
 
     const usersService = new UsersService();
+    const user = await usersService.create({ name, email, password, admin });
 
-    try {
-      const user = await usersService.create({ name, email, password, admin });
-
-      response.status(201).json({
-        status: "ok",
-        data: user
-      });
-    } catch (error) {
-      response.status(400).json({
-        status: "error",
-        data: error.message
-      });
-    }
+    response.status(201).json({
+      status: "ok",
+      data: user
+    });
   }
 }
 

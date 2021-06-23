@@ -1,2 +1,7 @@
+# ignorar arquivos de dependências
 node_modules
+
+# ignorar arquivos de log e de bancos de dados
 *.log
+*.sql
+*.sqlite
