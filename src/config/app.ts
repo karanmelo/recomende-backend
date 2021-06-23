@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 
-import { errorHandler } from '../middlewares/ErrorHandler';
+import { errorHandler } from '../middlewares/errorHandler';
 
 import '../database';
 import { routes } from './routes';

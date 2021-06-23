@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 
 import { UsersController } from '../controllers/UsersController';
 import { TagsController } from '../controllers/TagsController';
+import { ensureAdmin } from '../middlewares/ensureAdmin';
 
 const routes = Router();
 
@@ -14,6 +15,6 @@ routes.get('/', (_req: Request, res: Response) => {
 
 routes.post('/users', usersController.create);
 
-routes.post('/tags', tagsController.create);
+routes.post('/tags', ensureAdmin, tagsController.create);
 
 export { routes };
