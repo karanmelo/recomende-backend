@@ -1,4 +1,5 @@
 import { getCustomRepository, Repository } from 'typeorm';
+import { hash } from 'bcryptjs';
 
 import { User } from '../entities/User';
 import { UsersRepository } from '../repositories/UsersRepository';
@@ -19,11 +20,13 @@ class UsersService {
       throw new Error('Já existe usuário cadastro com o e-mail fornecido.');
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = this.usersRepository.create({
       name,
       email,
-      password,
-      admin
+      admin,
+      password: passwordHash
     });
 
     await this.usersRepository.save(user);
