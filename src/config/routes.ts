@@ -4,7 +4,9 @@ import { UsersController } from '../controllers/UsersController';
 import { TagsController } from '../controllers/TagsController';
 import { AuthenticateUserController } from '../controllers/AuthenticateUserController';
 import { ComplimentsController } from '../controllers/ComplimentsController';
+
 import { ensureAdmin } from '../middlewares/ensureAdmin';
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const routes = Router();
 
@@ -19,7 +21,7 @@ routes.get('/', (_req: Request, res: Response) => {
 
 routes.post('/users', usersController.create);
 
-routes.post('/tags', ensureAdmin, tagsController.create);
+routes.post('/tags', ensureAuthenticated, ensureAdmin, tagsController.create);
 
 routes.post('/auth', authenticateUserController.authenticate);
 
