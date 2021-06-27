@@ -6,6 +6,7 @@ import { AuthenticateUserController } from '../controllers/AuthenticateUserContr
 import { ComplimentsController } from '../controllers/ComplimentsController';
 import { ListUserSenderComplimentsController } from '../controllers/ListUserSenderComplimentsController';
 import { ListUserReceiverComplimentsController } from '../controllers/ListUserReceiverComplimentsController';
+import { ListTagsController } from '../controllers/ListTagsController';
 
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
@@ -18,6 +19,7 @@ const authenticateUserController = new AuthenticateUserController();
 const complimnetsController = new ComplimentsController();
 const listUserSenderComplimentsController = new ListUserSenderComplimentsController();
 const listUserReceiverComplimentsController = new ListUserReceiverComplimentsController();
+const listTagsController = new ListTagsController();
 
 routes.get('/', (_req: Request, res: Response) => {
   res.send('<h1>Seja Bem-vindo à API do Recomende</h1>');
@@ -26,6 +28,8 @@ routes.get('/', (_req: Request, res: Response) => {
 routes.post('/users', usersController.create);
 
 routes.post('/tags', ensureAuthenticated, ensureAdmin, tagsController.create);
+
+routes.get('/tags', ensureAuthenticated, ensureAdmin, listTagsController.handle);
 
 routes.post('/auth', authenticateUserController.authenticate);
 
