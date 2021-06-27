@@ -6,16 +6,16 @@ class ComplimentsController {
 
   async create(request: Request, response: Response) {
     const {
-      user_sender,
       user_receiver,
       tag_id,
       message
     } = request.body as IComplimentRequest;
+    const { user_id } = request;
 
     const complimentsService = new ComplimentsService();
 
     const compliment = await complimentsService.create({
-      user_sender,
+      user_sender: user_id,
       user_receiver,
       tag_id,
       message

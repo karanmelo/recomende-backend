@@ -25,6 +25,6 @@ routes.post('/tags', ensureAuthenticated, ensureAdmin, tagsController.create);
 
 routes.post('/auth', authenticateUserController.authenticate);
 
-routes.post('/compliments', complimnetsController.create);
+routes.post('/compliments', ensureAuthenticated, complimnetsController.create);
 
 export { routes };
