@@ -27,11 +27,10 @@ routes.get('/', (_req: Request, res: Response) => {
   res.send('<h1>Seja Bem-vindo à API do Recomende</h1>');
 });
 
-routes.post('/users', usersController.create);
+routes.post('/users', ensureAuthenticated, usersController.create);
 routes.get('/users', ensureAuthenticated, listUsersController.handle);
 
 routes.post('/tags', ensureAuthenticated, ensureAdmin, tagsController.create);
-
 routes.get('/tags', ensureAuthenticated, ensureAdmin, listTagsController.handle);
 
 routes.post('/auth', authenticateUserController.authenticate);
@@ -39,7 +38,6 @@ routes.post('/auth', authenticateUserController.authenticate);
 routes.post('/compliments', ensureAuthenticated, complimnetsController.create);
 
 routes.get('/users/compliments/send', ensureAuthenticated, listUserSenderComplimentsController.handle);
-
 routes.get('/users/compliments/receiver', ensureAuthenticated, listUserReceiverComplimentsController.handle);
 
 export { routes };
