@@ -4,7 +4,6 @@ import { Expose } from "class-transformer";
 
 @Entity("tags")
 class Tag {
-
   @PrimaryColumn()
   readonly id: string;
 
